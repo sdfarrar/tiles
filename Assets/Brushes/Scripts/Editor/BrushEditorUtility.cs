@@ -110,7 +110,7 @@ public class BrushEditorUtility {
 		GUILayout.Label("This scene is not yet ready for level editing.");
 		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Initialize LTTP Dungeon")) {
-			PrepareScene("Assets/LTTP/Prefabs", Vector2.one * 0.16666f);
+			PrepareScene("Assets/LTTP/Prefabs", Vector2.one * 0.5f);
 		}
 		GUILayout.FlexibleSpace();
 		GUILayout.EndHorizontal();
