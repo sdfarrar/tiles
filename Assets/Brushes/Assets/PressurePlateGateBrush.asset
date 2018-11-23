@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Prefab: {fileID: 1950557872621194, guid: e54beaaf730024548906881aecd9dad0, type: 2}
   m_LayerName: Doors
-  m_PrefabOffset: {x: 0, y: 0, z: 0}
+  m_PrefabOffset: {x: 2, y: -0.5, z: 0}
   PressurePlatePrefab: {fileID: 1966074517055614, guid: d388caf5aaa889f448b62255a2edfe48,
     type: 2}
+  PressurePlatePrefabOffset: {x: 1, y: 0, z: 0}

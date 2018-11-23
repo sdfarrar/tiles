@@ -4,16 +4,17 @@ using UnityEngine;
 [CustomGridBrush(false, true, false, "Pressure Plate Door")]
 public class PressurePlateGateBrush : LayerObjectBrush<PressurePlateGate> {
 	public GameObject PressurePlatePrefab;
+	public Vector3 PressurePlatePrefabOffset = Vector3.zero;
 	//public Color m_KeyColor;
 
 	public override void Paint(GridLayout grid, GameObject layer, Vector3Int position) {
 		if (activeObject != null) {
 			if (activeObject.PressurePlate == null) {
-				GameObject newKey = BrushUtility.Instantiate(PressurePlatePrefab, grid.LocalToWorld(grid.CellToLocalInterpolated(position + offsetFromBottomLeft)), GetLayer());
-				newKey.GetComponent<PressurePlate>().Gate = activeObject;
-				BrushUtility.SetDirty(newKey);
+				GameObject newPlate = BrushUtility.Instantiate(PressurePlatePrefab, grid.LocalToWorld(grid.CellToLocalInterpolated(position + PressurePlatePrefabOffset)), GetLayer());
+				newPlate.GetComponent<PressurePlate>().Gate = activeObject;
+				BrushUtility.SetDirty(newPlate);
 
-				activeObject.PressurePlate = newKey.GetComponent<PressurePlate>();
+				activeObject.PressurePlate = newPlate.GetComponent<PressurePlate>();
 				//newKey.GetComponent<PressurePlate>().SetColor(m_KeyColor);
 				//activeObject.SetColor(m_KeyColor);
 				BrushUtility.SetDirty(activeObject);
