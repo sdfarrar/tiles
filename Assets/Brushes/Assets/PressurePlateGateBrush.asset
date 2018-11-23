@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49ef981ba069274a98fff64b0aec7cd, type: 3}
+  m_Name: PressurePlateGateBrush
+  m_EditorClassIdentifier: 
+  m_Prefab: {fileID: 1950557872621194, guid: e54beaaf730024548906881aecd9dad0, type: 2}
+  m_LayerName: Doors
+  m_PrefabOffset: {x: 0, y: 0, z: 0}
+  PressurePlatePrefab: {fileID: 1966074517055614, guid: d388caf5aaa889f448b62255a2edfe48,
+    type: 2}
