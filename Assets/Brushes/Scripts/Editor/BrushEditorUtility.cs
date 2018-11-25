@@ -32,6 +32,13 @@ public class BrushEditorUtility {
 		DrawLineBatched(grid, from, to);
 		EndLines();
 	}
+
+	public static void DrawLine(GridLayout grid, Vector3 from, Vector3 to, Color color) {
+		BeginLines(color);
+		DrawLineBatched(grid, from, to);
+		EndLines();
+	}
+
 	public static void BeginLines(Color color) {
 		InitializeMaterial(color);
 		GL.PushMatrix();
@@ -62,10 +69,14 @@ public class BrushEditorUtility {
 		EndLines();
 	}
 
-
 	public static void DrawLineBatched(GridLayout grid, Vector3Int from, Vector3Int to) {
 		GL.Vertex(grid.GetComponent<Grid>().GetCellCenterWorld(from));
 		GL.Vertex(grid.GetComponent<Grid>().GetCellCenterWorld(to));
+	}
+
+	public static void DrawLineBatched(GridLayout grid, Vector3 from, Vector3 to) {
+		GL.Vertex(from);
+		GL.Vertex(to);
 	}
 
 	public static void DrawSplitLineBatched(GridLayout grid, Vector3Int from, Vector3Int direction) {

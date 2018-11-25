@@ -17,3 +17,5 @@ MonoBehaviour:
   PressurePlatePrefab: {fileID: 1966074517055614, guid: d388caf5aaa889f448b62255a2edfe48,
     type: 2}
   PressurePlatePrefabOffset: {x: 1, y: 0, z: 0}
+  ClearTileLayers:
+  - Walls
