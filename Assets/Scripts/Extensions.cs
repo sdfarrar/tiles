@@ -22,6 +22,30 @@ public static class VectorExtensions {
     public static Vector3Int With(this Vector3Int vec, int? x=null, int? y=null, int? z=null) {
         return new Vector3Int(x ?? vec.x, y ?? vec.y, z ?? vec.z);        
     }
+
+    public static Vector2 xy(this Vector3 aVector) {
+        return new Vector2(aVector.x,aVector.y);
+    }
+    
+    public static Vector2 xz(this Vector3 aVector) {
+        return new Vector2(aVector.x,aVector.z);
+    }
+    
+    public static Vector2 yz(this Vector3 aVector) {
+        return new Vector2(aVector.y,aVector.z);
+    }
+    
+    public static Vector2 yx(this Vector3 aVector) {
+        return new Vector2(aVector.y,aVector.x);
+    }
+    
+    public static Vector2 zx(this Vector3 aVector) {
+        return new Vector2(aVector.z,aVector.x);
+    }
+
+    public static Vector2 zy(this Vector3 aVector) {
+        return new Vector2(aVector.z,aVector.y);
+    }
 }
 
 public static class TilemapExtensions {
