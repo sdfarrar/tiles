@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: DoorBrush
   m_EditorClassIdentifier: 
   m_Prefab: {fileID: 1105779980864708, guid: d573d6fc36f2e3346bdca8da36eb3033, type: 2}
+  m_PrefabRotation: {x: 0, y: 0, z: 0, w: -1}
   m_LayerName: Doors
   m_PrefabOffset: {x: 2, y: -0.5, z: 0}
   ClearTileLayers:

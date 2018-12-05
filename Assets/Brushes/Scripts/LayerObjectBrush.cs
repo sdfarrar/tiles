@@ -10,12 +10,8 @@ public abstract class LayerObjectBrush<T> : GridBrushBase {
 
 	public virtual Vector3 offsetFromBottomLeft {
         get {
-            float dot = Quaternion.Dot(Quaternion.identity, m_PrefabRotation);
-            if(Mathf.Approximately(dot, 0f) || Mathf.Approximately(dot, -1f)){
-                return m_PrefabOffset; 
-            }else{
-                return m_PrefabOffset.yx();
-            }
+            int zAngle = (int)m_PrefabRotation.eulerAngles.z;
+            return (zAngle==0 || zAngle==180) ? m_PrefabOffset : m_PrefabOffset.yx().With(z:0);
         } 
     }
 	public virtual bool alwaysCreateOnPaint { get { return false; } }
@@ -76,18 +72,24 @@ public abstract class LayerObjectBrush<T> : GridBrushBase {
     public override void Rotate(RotationDirection direction, GridLayout.CellLayout layout) {
         base.Rotate(direction, layout);
         if(direction==RotationDirection.Clockwise){
-            m_PrefabRotation *= Quaternion.Euler(Vector3.forward * 90f);
+            AddToPrefabRotation(Vector3.forward * 90f);
         }else if(direction==RotationDirection.CounterClockwise){
-            m_PrefabRotation *= Quaternion.Euler(Vector3.forward * -90f);
+            AddToPrefabRotation(Vector3.forward * -90f);
         }
+    }
+
+    public override void Flip(FlipAxis flip, GridLayout.CellLayout layout) {
+        base.Flip(flip, layout);
+        if(flip==FlipAxis.X){
+            AddToPrefabRotation(Vector3.up * 180);
+        }else if(flip==FlipAxis.Y){
+            AddToPrefabRotation(Vector3.forward * 180);
+        }
+    }
+
+    private void AddToPrefabRotation(Vector3 euler) {
+        m_PrefabRotation *= Quaternion.Euler(euler);
         m_PrefabRotation.Normalize();
-        float dot = Quaternion.Dot(Quaternion.identity, m_PrefabRotation);
-        Debug.Log("ROTATE: " + direction + " | rotation: " + m_PrefabRotation.eulerAngles + " | " + dot);
-        if(Mathf.Approximately(dot, 0f) || Mathf.Approximately(dot, -1f)){
-            Debug.Log("not on side");
-        }else{
-            Debug.Log("on side");
-        }
     }
 
 

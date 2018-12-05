@@ -15,9 +15,9 @@ public class DoorBrush : LayerObjectBrush<Door> {
 
 		if (activeObject != null) {
 			if (activeObject.Exit == null) {
-                Vector3 exitPosition = grid.LocalToWorld(grid.CellToLocalInterpolated(position + m_PrefabOffset));
-				GameObject exitDoor = BrushUtility.Instantiate(m_Prefab, exitPosition, GetLayer());
-                exitDoor.transform.rotation = Quaternion.Euler(0, 0, activeObject.transform.rotation.eulerAngles.z + 180f);
+                //GameObject exitDoor = BrushUtility.Instantiate(m_Prefab, grid.LocalToWorld(grid.CellToLocalInterpolated(position + offsetFromBottomLeft)), GetLayer());
+                //exitDoor.transform.rotation = Quaternion.Euler(0, 0, activeObject.transform.rotation.eulerAngles.z + 180f); // flip Z
+                GameObject exitDoor = CreateExitDoor(grid, position);
 				exitDoor.GetComponent<Door>().Exit = activeObject;
 				BrushUtility.SetDirty(exitDoor);
 
@@ -67,6 +67,12 @@ public class DoorBrush : LayerObjectBrush<Door> {
 			}
 		}
 	}
+
+    private GameObject CreateExitDoor(GridLayout grid, Vector3Int position){
+        GameObject door = BrushUtility.Instantiate(m_Prefab, grid.LocalToWorld(grid.CellToLocalInterpolated(position + offsetFromBottomLeft)), GetLayer());
+        door.transform.rotation = activeObject.transform.rotation * Quaternion.AngleAxis(180f, Vector3.forward);
+        return door;
+    }
 
 	private void DestroyDoor(Door door) {
 		if (door.Exit != null){

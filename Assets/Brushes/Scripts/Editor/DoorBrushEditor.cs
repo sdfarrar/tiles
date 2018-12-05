@@ -27,6 +27,7 @@ public class DoorBrushEditor : LayerObjectBrushEditor<DoorBrush> {
         if(tool==GridBrushBase.Tool.Paint){
             previewGO.SetActive(true);
             previewGO.transform.position = gridLayout.CellToLocalInterpolated(bounds.position + brush.offsetFromBottomLeft);
+            previewGO.transform.rotation = brush.m_PrefabRotation;
         }else{
             previewGO.SetActive(false);
         }

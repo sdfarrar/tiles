@@ -15,6 +15,7 @@ public static class GridExtensions {
 
 public static class VectorExtensions {
 
+    // Vector3 Extensions
     public static Vector3 With(this Vector3 vec, float? x=null, float? y=null, float? z=null) {
         return new Vector3(x ?? vec.x, y ?? vec.y, z ?? vec.z);        
     }
@@ -23,29 +24,35 @@ public static class VectorExtensions {
         return new Vector3Int(x ?? vec.x, y ?? vec.y, z ?? vec.z);        
     }
 
-    public static Vector2 xy(this Vector3 aVector) {
-        return new Vector2(aVector.x,aVector.y);
-    }
-    
-    public static Vector2 xz(this Vector3 aVector) {
-        return new Vector2(aVector.x,aVector.z);
-    }
-    
-    public static Vector2 yz(this Vector3 aVector) {
-        return new Vector2(aVector.y,aVector.z);
-    }
-    
-    public static Vector2 yx(this Vector3 aVector) {
-        return new Vector2(aVector.y,aVector.x);
-    }
-    
-    public static Vector2 zx(this Vector3 aVector) {
-        return new Vector2(aVector.z,aVector.x);
+    // Vector2 Extensions
+    public static Vector3 With(this Vector2 vec, float? x=null, float? y=null, float? z=null) {
+        return new Vector3(x ?? vec.x, y ?? vec.y, z ?? 0);        
     }
 
-    public static Vector2 zy(this Vector3 aVector) {
-        return new Vector2(aVector.z,aVector.y);
+    public static Vector2 xy(this Vector3 vec) {
+        return new Vector2(vec.x,vec.y);
     }
+    
+    public static Vector2 xz(this Vector3 vec) {
+        return new Vector2(vec.x,vec.z);
+    }
+    
+    public static Vector2 yz(this Vector3 vec) {
+        return new Vector2(vec.y,vec.z);
+    }
+    
+    public static Vector2 yx(this Vector3 vec) {
+        return new Vector2(vec.y,vec.x);
+    }
+    
+    public static Vector2 zx(this Vector3 vec) {
+        return new Vector2(vec.z,vec.x);
+    }
+
+    public static Vector2 zy(this Vector3 vec) {
+        return new Vector2(vec.z,vec.y);
+    }
+
 }
 
 public static class TilemapExtensions {
