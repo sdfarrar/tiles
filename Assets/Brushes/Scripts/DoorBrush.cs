@@ -15,8 +15,6 @@ public class DoorBrush : LayerObjectBrush<Door> {
 
 		if (activeObject != null) {
 			if (activeObject.Exit == null) {
-                //GameObject exitDoor = BrushUtility.Instantiate(m_Prefab, grid.LocalToWorld(grid.CellToLocalInterpolated(position + offsetFromBottomLeft)), GetLayer());
-                //exitDoor.transform.rotation = Quaternion.Euler(0, 0, activeObject.transform.rotation.eulerAngles.z + 180f); // flip Z
                 GameObject exitDoor = CreateExitDoor(grid, position);
 				exitDoor.GetComponent<Door>().Exit = activeObject;
 				BrushUtility.SetDirty(exitDoor);
@@ -54,30 +52,17 @@ public class DoorBrush : LayerObjectBrush<Door> {
     }
 
 	public override void Erase(GridLayout grid, GameObject layer, Vector3Int position) {
-		foreach (var door in allObjects) {
-			if (grid.WorldToCell(door.transform.position) == position) {
-				DestroyDoor(door);
-				BrushUtility.Select(BrushUtility.GetRootGrid(false).gameObject);
-				return;
-			}
-			if (door.Exit != null && grid.WorldToCell(door.Exit.transform.position) == position) {
-				DestroyImmediate(door.Exit.gameObject);
-				door.Exit = null;
-				BrushUtility.SetDirty(door);
-			}
+		Door door = GetObject(grid, position);
+		if (door.Exit && door.Exit.Exit==door) {
+            door.Exit.Exit = null;
 		}
+        BrushUtility.Destroy(door.gameObject);
+        BrushUtility.Select(GetLayer().gameObject);
 	}
 
     private GameObject CreateExitDoor(GridLayout grid, Vector3Int position){
         GameObject door = BrushUtility.Instantiate(m_Prefab, grid.LocalToWorld(grid.CellToLocalInterpolated(position + offsetFromBottomLeft)), GetLayer());
-        door.transform.rotation = activeObject.transform.rotation * Quaternion.AngleAxis(180f, Vector3.forward);
+        door.transform.rotation = m_PrefabRotation * Quaternion.AngleAxis(180f, Vector3.forward);
         return door;
     }
-
-	private void DestroyDoor(Door door) {
-		if (door.Exit != null){
-			DestroyImmediate(door.Exit.gameObject);
-		}
-		DestroyImmediate(door.gameObject);
-	}
 }

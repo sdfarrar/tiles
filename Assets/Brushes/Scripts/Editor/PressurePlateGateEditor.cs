@@ -8,6 +8,15 @@ using UnityEngine.Tilemaps;
 public class PressurePlateGateBrushEditor : LayerObjectBrushEditor<PressurePlateGate> {
 	public new PressurePlateGateBrush brush { get { return (target as PressurePlateGateBrush); } }
 
+    private GameObject _currentPreview;
+    private GameObject currentPreview {
+        get { return _currentPreview; }
+        set {
+            _currentPreview = value;
+            InstantiatePreviewGameObject(value);
+        }
+    }
+
 	public void OnSceneGUI() {
 		Grid grid = BrushUtility.GetRootGrid(false);
 		PressurePlateGate gate = brush.activeObject;
@@ -28,6 +37,23 @@ public class PressurePlateGateBrushEditor : LayerObjectBrushEditor<PressurePlate
 			BrushEditorUtility.UnpreparedSceneInspector();
 		}
 	}
+
+    protected override void DrawPrefabPreview(GridLayout gridLayout, GameObject brushTarget, BoundsInt bounds, GridBrushBase.Tool tool, bool executing, Vector3 prefabOffset) {
+        Vector3 offset = prefabOffset;
+        if(!brush.activeObject) { // No gate yet
+            if(currentPreview != brush.m_Prefab) { currentPreview = brush.m_Prefab; }
+        }else if(brush.activeObject && !brush.activeObject.PressurePlate){ // Gate but no plate
+            if(currentPreview != brush.PressurePlatePrefab) { currentPreview = brush.PressurePlatePrefab; }
+            offset = brush.PressurePlatePrefabOffset;
+        }else { // Gate and plate, reset
+            if(currentPreview != brush.m_Prefab) { currentPreview = brush.m_Prefab; }
+        }
+        base.DrawPrefabPreview(gridLayout, brushTarget, bounds, tool, executing, offset);
+    }
+
+    private void SwapCurrentPreview(GameObject prefab) {
+        InstantiatePreviewGameObject(brush.m_Prefab);
+    }
 
     public override void RegisterUndo(GameObject layer, GridBrushBase.Tool tool) {
         //base.RegisterUndo(layer, tool);
