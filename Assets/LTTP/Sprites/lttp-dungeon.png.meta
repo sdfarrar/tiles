@@ -328,6 +328,7 @@ TextureImporter:
     21300646: lttp-dungeon_323
     21300648: lttp-dungeon_324
     21300650: lttp-dungeon_325
+    21300652: lttp-dungeon_empty
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -6929,6 +6930,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 00062d46f34b3d040b92ce6a07c9ce02
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lttp-dungeon_empty
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 216
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be0aa2672322fc74ebcc4bf4630becec
       vertices: []
       indices: 
       edges: []
